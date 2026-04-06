@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 using namespace std;
-
 vector<int> seg;
 
 // update: add val at position idx
