@@ -2,7 +2,6 @@
 #include <iostream>
 #include<vector>
 using namespace std;
-
 void update(int i, int l, int r, int st, int end, int val,
             vector<int>& segment, vector<int>& lazy) {
     if(lazy[i]!=0){
