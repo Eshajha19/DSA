@@ -1,84 +1,80 @@
+// Online C++ compiler to run C++ program online
 #include <iostream>
-#include <queue>
 using namespace std;
-
-class node {
-public:
-    int data;
-    node* left;
-    node* right;
-
-    node(int d) {
-        data = d;
-        left = NULL;
-        right = NULL;
-    }
+#include<queue>
+class node{
+    public:
+       int data;
+       node*left;
+       node*right;
+       node(int d){
+           this->data=d;
+           this->left=NULL;
+           this->right=NULL;
+       }
 };
-
-node* buildtree() {
-    int d;
-    cin >> d;
-    if (d == -1)
-        return NULL;
-    node* root = new node(d);
-    cout << "Enter data for left of " << root->data << ": ";
-    root->left = buildtree();
-    cout << "Enter data for right of " << root->data << ": ";
-    root->right = buildtree();
+node *buildtree(){
+    int data;
+    cin>>data;
+    if(data==-1)
+      return NULL;
+    node*root=new node(data);
+    cout<<"Enter data for left of "<<root->data<<":";
+    root->left=buildtree();
+    cout<<"Enter data for right of "<<root->data<<":";
+    root->right=buildtree();
     return root;
 }
-
-void levelorder(node* root) {
-    if (root == NULL)
-        return;
-    queue<node*> q;
+void levelorder(node *root){
+    queue<node*>q;
     q.push(root);
     q.push(NULL);
-    while (!q.empty()) {
-        node* temp = q.front();
+    while(!q.empty()){
+        node *temp=q.front();
         q.pop();
-        if (temp == NULL) {
-            cout << endl;
-            if (!q.empty())
-                q.push(NULL);
+        if(temp==NULL){
+            cout<<endl;
+            if(!q.empty())
+              q.push(NULL);
         }
-        else {
-            cout << temp->data << " ";
-            if (temp->left)
-                q.push(temp->left);
-            if (temp->right)
-                q.push(temp->right);
+        else{
+            cout << temp->data << " "; 
+            if(temp->left)
+              q.push(temp->left);
+            if(temp->right)
+              q.push(temp->right);
         }
     }
 }
-void inordertraversal(node*root){
+void inorder(node *root){
     if(root==NULL)
       return ;
-    inordertraversal(root->left);
+    inorder(root->left);
     cout<<root->data<<" ";
-    inordertraversal(root->right);
+    inorder(root->right);
 }
-void preordertraversal(node*root){
+void preorder(node *root){
     if(root==NULL)
       return ;
     cout<<root->data<<" ";
-    preordertraversal(root->left);
-    preordertraversal(root->right);
+    preorder(root->left);
+    preorder(root->right);
 }
-void postordertraversal(node*root){
+void postorder(node *root){
     if(root==NULL)
       return ;
-    postordertraversal(root->left);
-    postordertraversal(root->right);
+    postorder(root->left);
+    postorder(root->right);
     cout<<root->data<<" ";
 }
 int main() {
-    cout << "Enter tree data (-1 for NULL):" << endl;
-    node* root = buildtree();
-    cout << "\nLevel Order Traversal:\n";
-    inordertraversal(root);
-    preordertraversal(root);
-    postordertraversal(root);
+    node*root=buildtree();
     levelorder(root);
+    cout<<endl;
+    inorder(root);
+    cout<<endl;
+    preorder(root);
+    cout<<endl;
+    postorder(root);
     return 0;
 }
